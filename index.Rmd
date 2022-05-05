@@ -1,6 +1,6 @@
 --- 
 title: "cryptoGraphic"
-author: "Xuan Lian"
+author: "Xuan Lian:xl3144 Chang Zhou:cz2688"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---

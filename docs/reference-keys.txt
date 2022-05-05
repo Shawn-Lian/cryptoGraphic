@@ -19,3 +19,6 @@ google-trend-v.s-state
 related-query
 interactive-component
 conclusion
+main-conclusion
+future-directions
+lessons-learned

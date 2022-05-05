@@ -1,2 +1,128 @@
 # Interactive component
 
+```{r}
+library(tidyverse)
+library(reshape2)
+library(magrittr)
+library(ggplot2)
+library(plotly)
+library(gridExtra)
+library(ggpubr)
+library(RCurl)
+```
+
+```{r}
+## This API will also load data significantly slow, so we write the data to csv
+
+# Bitcoin_US_trend_monthly_by_state = NA
+# for (year in seq(2016,2021)){
+#   for(month in seq(1,12)){
+#   if(month==12){time_period = paste0(year,'-12-01 ',year+1,'-01-01')}
+#   else{time_period = paste0(year,'-',month,'-01 ',year,'-',month+1,'-01')}
+#   new_trend =
+#     gtrends(c("Bitcoin"), geo = c("US"),time = time_period)$interest_by_region %>%
+#     mutate('year' = year,'month' = month)
+#   Bitcoin_US_trend_monthly_by_state = rbind(Bitcoin_US_trend_monthly_by_state,new_trend)
+# }}
+# write_csv(Bitcoin_US_trend_monthly_by_state,'Bitcoin_US_trend_monthly_by_state.csv')
+```
+
+```{r}
+# Bitcoin_US_trend_monthly_by_state = read_csv('Bitcoin_US_trend_monthly_by_state.csv') %>%
+#   dplyr::select(location,hits,year,month) %>%
+#   drop_na()
+# ann_dt = Bitcoin_US_trend_monthly_by_state
+# ann_dt = ann_dt %>% mutate(time = as.yearmon(paste0(year,'-',month)))
+# ann_dt$time = factor(ann_dt$time)
+# ann_dt = ann_dt %>%
+#   group_by(location) %>%
+#   mutate(total = cumsum(hits))
+# 
+# ann_dt_formatted =ann_dt %>% group_by(time) %>%
+#   mutate(Total_all = sum(total),
+#          fixed_y = max(total),
+#          rank = rank(-total,ties.method = 'random'),
+#          value_rel = total/total[floor(rank)==1]+0.02,
+#          Value_lbl = paste0(" ", formatC(total, big.mark = ','))) %>%
+#   group_by(location) %>%
+#   filter(rank <= 10)
+# stopifnot(all(levels(ann_dt_formatted$time) == levels(ann_dt$time)))
+```
+
+```{r}
+# total_text_y = 0.87*(max(ann_dt_formatted$total))
+# panel_size_y = max(ann_dt_formatted$total) * 1.15
+# vline_original_y = seq(floor(max(ann_dt_formatted$total)/8),
+#                        max(ann_dt_formatted$total),
+#                        by=floor(max(ann_dt_formatted$total)/8))
+# 
+# country_font_size = 8
+# bar_end_num_size = 10
+# 
+# staticplot = ggplot(ann_dt_formatted,
+#                     aes(rank, group = location,
+#                         fill = as.factor(location),
+#                         color = as.factor(location))) +
+#   geom_tile(aes(y = total/2, height = total, width = 0.9),
+#             alpha = 0.9, color = NA) +
+#   geom_text(aes(y = 0, label = paste(location, " ")), vjust = 0.2, hjust = 1,
+#             size = country_font_size, fontface = "bold") +
+#   geom_text(aes(y = total, label = Value_lbl, hjust = 0), fontface = 'bold', size = bar_end_num_size) +
+#   geom_hline(yintercept = vline_original_y, size = .08, color = "grey", linetype = 'dotted') +
+#   scale_y_continuous(labels = scales::comma) +
+#   scale_x_reverse() +
+#   coord_flip(clip = "off", expand = FALSE) +
+#   guides(color = FALSE, fill = FALSE) +
+#   theme(axis.line = element_blank(),
+#         axis.text.y = element_blank(),
+#         axis.ticks = element_blank(),
+#         axis.title.x = element_blank(),
+#         axis.title.y = element_blank(),
+#         legend.position = "none",
+# 
+#         plot.background = element_rect(fill = "black"),
+#         panel.background = element_rect(fill = 'black'),
+# 
+#         panel.border=element_blank(),
+# 
+#         panel.grid.major = element_blank(),
+#         panel.grid.minor = element_blank(),
+# 
+#         plot.title = element_text(size=40, face="bold", colour='grey', vjust=1),
+#         plot.subtitle = element_text(size=18, face="italic", color="grey"),
+#         plot.caption = element_text(size=15, hjust=0.5, face="italic", color="grey"),
+# 
+#         plot.margin = margin(2, 5, 2, 8, "cm"))
+# 
+# current_state_len = 0
+# current_transition_len = 3
+# 
+# anim = staticplot +
+#   transition_states(time, transition_length = current_transition_len, state_length = current_state_len) +
+#   ease_aes('cubic-in-out') +
+#   view_follow(fixed_x = TRUE, fixed_y = c(-10, NA))  +
+#   labs(title = 'Cumulative Google Trend Index of Bitcoin per month: {closest_state}',
+#        subtitle = 'Top 10 States',
+#        caption = "Data Source: Google Trend")
+```
+
+```{r}
+# library(gifski)
+# 
+# # output_type = 'GIF'
+# animate_speed = 10
+# 
+#   ### Save as GIF
+# save_name = "animate.gif"
+# animate(anim, 320, fps = animate_speed, 
+#         width = 1500, height = 1000, end_pause = 10, start_pause = 10, 
+#         renderer = gifski_renderer(save_name))  
+# 
+# print(sprintf('==== GIF file %s saved ====', save_name))
+```
+
+We plot the animate of the Cumulative Google Trend Index of Bitcoin per month of each State in the United States since 2016 to 2021.
+
+![](animate.gif)
+
+This animate plot provides the same conclusions as our previous discussion, people in Nevada grow their interest in cryptos after their Governor set the easing policy on cryptocurrencies.
