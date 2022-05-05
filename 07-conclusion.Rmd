@@ -14,7 +14,6 @@
 
 - Related query: ‘Stock’ and ‘Ethereum’ are most related with Bitcoin search , which confirms that cryptocurrencies have strong correlations with each other and with traditional stocks.
 
-- There is no systematic and quantitative study on the factors influencing the price changes of bitcoin and other cryptos.
 
 ## Future Directions
 

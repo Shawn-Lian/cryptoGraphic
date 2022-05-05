@@ -71,6 +71,6 @@ And after having the basic idea of the cryptocurrencies, we want try to doing so
 
 - Explore the development trend of cryptocurrencies from the market cap and their public attention. 
 
-- Show how the cryptocurrencies are different from traditional financial derivatives by comparing their behavior when affected by the positive or negative factor under the same time period. 
+- Show how the relationship between cryptocurrencies and traditional financial derivatives by comparing their pricing behavior under the same time period. 
 
-- What factors are related to the price of cryptocurrencies? Rather than modeling, we will apply an exploratory data analysis on this question. 
+- How is public attention related to the price of cryptocurrencies? Rather than modeling, we will apply an exploratory data analysis on this question. 
